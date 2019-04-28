@@ -11,4 +11,4 @@ const supplierSchema = new mongoose.Schema({
 
 supplierSchema.plugin(require('mongoose-unique-validator'))
 
-module.exports = mongoose.model('Example', supplierSchema)
+module.exports = mongoose.model('Supplier', supplierSchema)
