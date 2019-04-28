@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const { dbURI } = require("../config/environment");
 const Supplier = require("../models/supplier");
+const Product = require("../models/product");
+const Promise = require("bluebird");
+
 
 mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
   db.dropDatabase();
@@ -13,7 +16,49 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       name: "Old Co Ltd"
     }
   ])
-    .then(supplier => console.log(`${supplier.length} suppliers created`))
+    // .then(supplier => console.log(`${supplier.length} suppliers created`))
+    .then(supplier => {
+      return Promise.all([
+        supplier,
+        Product.create([
+          {
+            name: "Small wongle",
+            supplier: [supplier[0]._id],
+            price: 5
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[0]._id],
+            price: 8
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[0]._id],
+            price: 12
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[1]._id],
+            price: 4
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[1]._id],
+            price: 6
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[1]._id],
+            price: 9
+          },
+          {
+            name: "Large wongle",
+            supplier: [supplier[1]._id],
+            price: 13
+          }
+        ])
+      ])
+    })
     .catch(err => console.log(err))
-    .finally(() => mongoose.connection.close());
-});
+    .finally(() => mongoose.connection.close())
+})

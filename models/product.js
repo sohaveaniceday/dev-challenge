@@ -2,12 +2,13 @@ const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  suppliers: [ {
+  supplier: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Supplier',
+    ref: "Supplier",
     required: true,
-  } ]
-})
+  },
+  price: { type: Number, required: true }
+});
 
 productSchema.plugin(require('mongoose-unique-validator'))
 
