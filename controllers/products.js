@@ -1,25 +1,25 @@
-const Supplier = require('../models/supplier')
+const Product = require('../models/product')
 
 function indexRoute(req, res) {
-  return Supplier
+  return Product
     .find(req.query)
-    .then(supplier => res.status(200).json(supplier))
+    .then(product => res.status(200).json(product))
     .catch(err => res.json(err))
 }
 
 function createRoute(req,res) {
-  return Supplier
+  return Product
     .create(req.body)
-    .then(supplier => res.status(201).json(supplier))
+    .then(product => res.status(201).json(product))
     .catch(err => res.json(err))
 }
 
 function showRoute(req, res) {
-  return Supplier
+  return Product
     .findById(req.params.id)
-    .then(supplier => {
-      if (!supplier) return res.status(404).json({ message: 'Not Found'})
-      res.status(200).json(supplier)
+    .then(product => {
+      if (!product) return res.status(404).json({ message: 'Not Found'})
+      res.status(200).json(product)
     })
     .catch(err => res.json(err))
 }
