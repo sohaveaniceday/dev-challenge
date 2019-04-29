@@ -2,23 +2,37 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './style.scss'
 import axios from 'axios'
-// import $ from 'jquery'
-import 'bootstrap'
 
 import { BrowserRouter as Browser } from 'react-router-dom'
 // import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
 
 class App extends React.Component {
 
+    constructor() {
+        super()
+        this.state = {}
+    }
+
     componentDidMount() {
-      axios.get('/api/products')
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+        axios.all([
+            axios.get(`/api/suppliers`),
+            axios.get('/api/products'),
+        ])
+            .then(res => {
+                const [suppliers, products] = res
+                const uniqueProducts = Array.from(new Set(products.data.map(product => product.name)))
+                    .map(name => {
+                        return products.data.find(product => product.name === name)
+                    })
+                this.setState({ suppliers, uniqueProducts })
+            })
     }
 
 
 
     render() {
+        console.log('state', this.state)
+        
         return (
             <Browser>
                 <main>
@@ -26,7 +40,6 @@ class App extends React.Component {
                         <div className="row">
                             <div className="col-sm-12 col-md-12 main">
                                 <h1 className="page-header">Product pricing</h1>
-
                                 <form>
                                     <div className="row">
                                         <div className="form-group col-md-6">

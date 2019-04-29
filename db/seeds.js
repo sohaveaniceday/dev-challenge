@@ -32,17 +32,17 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             price: 8
           },
           {
-            name: "Large wongle",
+            name: "Super wongle",
             supplier: [supplier[0]._id],
             price: 12
           },
           {
-            name: "Large wongle",
+            name: "Mini wongle",
             supplier: [supplier[1]._id],
             price: 4
           },
           {
-            name: "Large wongle",
+            name: "Small wongle",
             supplier: [supplier[1]._id],
             price: 6
           },
@@ -52,7 +52,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
             price: 9
           },
           {
-            name: "Large wongle",
+            name: "Super wongle",
             supplier: [supplier[1]._id],
             price: 13
           }
