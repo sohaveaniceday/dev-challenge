@@ -16,7 +16,6 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       name: "Old Co Ltd"
     }
   ])
-    // .then(supplier => console.log(`${supplier.length} suppliers created`))
     .then(supplier => {
       return Promise.all([
         supplier,
