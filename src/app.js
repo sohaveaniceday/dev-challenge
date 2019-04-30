@@ -29,27 +29,33 @@ class App extends React.Component {
   }
 
   updateResults() {
-      if (
+    if (
         this.state.data &&
         this.state.data.product &&
         this.state.data.supplier
     ) {
     let productResult = this.state.products.data.filter(
-    obj => {
-        return obj._id === this.state.data.product
+    product => {
+        return (
+          product.name === this.state.data.product &&
+          product.supplier._id === this.state.data.supplier
+        )
+    })
+    if (productResult.length !== 0) {
+        let result = {
+        ...this.state.result,
+        product: productResult[0].name,
+        supplier: productResult[0].supplier.name,
+        price: productResult[0].price,
+        id: productResult[0]._id
+        }
+        this.setState({ result })
+        } else {
+        let result = {}
+        this.setState({ result })
+        }
+        }
     }
-    )
-    let result = {
-    ...this.state.result,
-    product: productResult[0].name,
-    supplier: productResult[0].supplier.name,
-    price: productResult[0].price,
-    id: productResult[0]._id
-    }
-    this.setState({ result })
-    console.log('testing')
-}
-}
 
   handleChange(e) {
     let selection = e.target
@@ -78,7 +84,7 @@ class App extends React.Component {
                         onChange={this.handleChange}
                         name="supplier"
                       >
-                        <option>Select Supplier</option>
+                        <option value="x">Select Supplier</option>
                         {this.state.suppliers &&
                           this.state.suppliers.data.map(supplier => (
                             <option key={supplier._id} value={supplier._id}>
@@ -95,10 +101,10 @@ class App extends React.Component {
                         onChange={this.handleChange}
                         name="product"
                       >
-                        <option>Select Product</option>
+                        <option value="x">Select Product</option>
                         {this.state.uniqueProducts &&
                           this.state.uniqueProducts.map(product => (
-                            <option key={product._id} value={product._id}>
+                            <option key={product._id} value={product.name}>
                               {product.name}
                             </option>
                           ))}
@@ -118,7 +124,7 @@ class App extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.result && (
+                      {this.state.result && this.state.result !== {} && (
                         <tr>
                           <td>{this.state.result.id}</td>
                           <td>{this.state.result.supplier}</td>
