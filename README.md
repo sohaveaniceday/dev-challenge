@@ -21,7 +21,7 @@ I have completed the task as described by:
 * Incorporating SASS to styling
 * Adding a test file using Mocha, Chai and SuperTest to test the backend  ('yarn test' to initiate testing)
 
-# Biggest Challenge
+## Biggest Challenge
 
 The biggest challenge was handling the different products the suppliers possessed. I wanted the user to only be able to select a product if a company had it in their roster. To achieve this I disabled the dropdown for the product selector until the supplier has been chosen - the API then makes a call and retrieves all the products that supplier has and fills in the supplier dropdown, enabling it in the process.
 
