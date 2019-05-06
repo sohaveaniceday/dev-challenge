@@ -17,7 +17,7 @@ app.use("/api", router);
 
 app.get("/*", (req, res) => res.sendfile(`${__dirname}/dist/index.html`));
 
-app.listen(port, () => console.log(`App is listenting on port ${port}`))
+app.listen(port, () => console.log(`App is listening on port ${port}`))
 
 module.exports = app;
 
