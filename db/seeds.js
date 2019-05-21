@@ -1,8 +1,8 @@
-const mongoose = require("mongoose")
-const Promise = require("bluebird")
-const { dbURI } = require("../config/environment")
-const Supplier = require("../models/supplier")
-const Product = require("../models/product")
+const mongoose = require('mongoose')
+const Promise = require('bluebird')
+const { dbURI } = require('../config/environment')
+const Supplier = require('../models/supplier')
+const Product = require('../models/product')
 
 
 mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
@@ -10,10 +10,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
 
   Supplier.create([
     {
-      name: "New Co Ltd"
+      name: 'New Co Ltd'
     },
     {
-      name: "Old Co Ltd"
+      name: 'Old Co Ltd'
     }
   ])
     .then(supplier => {
@@ -21,37 +21,37 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
         supplier,
         Product.create([
           {
-            name: "Small wongle",
+            name: 'Small wongle',
             supplier: [supplier[0]._id],
             price: 5
           },
           {
-            name: "Large wongle",
+            name: 'Large wongle',
             supplier: [supplier[0]._id],
             price: 8
           },
           {
-            name: "Super wongle",
+            name: 'Super wongle',
             supplier: [supplier[0]._id],
             price: 12
           },
           {
-            name: "Mini wongle",
+            name: 'Mini wongle',
             supplier: [supplier[1]._id],
             price: 4
           },
           {
-            name: "Small wongle",
+            name: 'Small wongle',
             supplier: [supplier[1]._id],
             price: 6
           },
           {
-            name: "Large wongle",
+            name: 'Large wongle',
             supplier: [supplier[1]._id],
             price: 9
           },
           {
-            name: "Super wongle",
+            name: 'Super wongle',
             supplier: [supplier[1]._id],
             price: 13
           }

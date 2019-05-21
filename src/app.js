@@ -21,15 +21,15 @@ class App extends React.Component {
   }
 
   handleSupplier(e) {
-    let result = {}
-    let products = {}
-    let selection = e.target
-    let data = { ...this.state.data, result, products, supplier: selection.value }
+    const result = {}
+    const products = {}
+    const selection = e.target
+    const data = { ...this.state.data, result, products, supplier: selection.value }
     this.setState({ data }, () => {
       this.updateResults()
     })
     axios.get(`/api/products`).then(res => {
-      let products = res.data.filter(product => {
+      const products = res.data.filter(product => {
         return product.supplier._id === selection.value
       })
       this.setState({ products: products })
@@ -37,8 +37,8 @@ class App extends React.Component {
   }
 
   handleProduct(e) {
-    let selection = e.target
-    let data = { ...this.state.data, product: selection.value }
+    const selection = e.target
+    const data = { ...this.state.data, product: selection.value }
     this.setState({ data }, () => {
       this.updateResults()
     })
@@ -46,14 +46,14 @@ class App extends React.Component {
 
   updateResults() {
     if (this.state.data.product && this.state.data.supplier) {
-      let productResult = this.state.products.filter(product => {
+      const productResult = this.state.products.filter(product => {
         return (
           product.name === this.state.data.product &&
           product.supplier._id === this.state.data.supplier
         )
       })
       if (productResult.length !== 0) {
-        let result = {
+        const result = {
           ...this.state.result,
           product: productResult[0].name,
           supplier: productResult[0].supplier.name,
@@ -62,7 +62,7 @@ class App extends React.Component {
         }
         this.setState({ result })
       } else {
-        let result = {}
+        const result = {}
         this.setState({ result })
       }
     }
