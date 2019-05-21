@@ -29,7 +29,7 @@ function showRoute(req, res) {
 module.exports = {
   index: indexRoute,
   create: createRoute,
-  show: showRoute,
+  show: showRoute
 }
 
 

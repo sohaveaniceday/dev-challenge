@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
-const { dbURI } = require("../config/environment");
-const Supplier = require("../models/supplier");
-const Product = require("../models/product");
-const Promise = require("bluebird");
+const mongoose = require("mongoose")
+const Promise = require("bluebird")
+const { dbURI } = require("../config/environment")
+const Supplier = require("../models/supplier")
+const Product = require("../models/product")
 
 
 mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
-  db.dropDatabase();
+  db.dropDatabase()
 
   Supplier.create([
     {

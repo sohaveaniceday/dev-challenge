@@ -16,7 +16,7 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get(`/api/suppliers`)
+      .get('/api/suppliers')
       .then(res => this.setState({ suppliers: res.data }))
   }
 
@@ -76,55 +76,55 @@ class App extends React.Component {
             <div className="row">
               <div className="col-sm-12 col-md-12 main">
                 <h1 className="page-header">Product pricing</h1>
-                  <div className="row">
-                    <div className="form-group col-md-6">
-                      <label htmlFor="selSupplier">Supplier</label>
+                <div className="row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="selSupplier">Supplier</label>
+                    <select
+                      className="form-control"
+                      id="selSupplier"
+                      onChange={this.handleSupplier}
+                      name="supplier"
+                    >
+                      <option value="x">Select Supplier</option>
+                      {this.state.suppliers &&
+                        this.state.suppliers.map(supplier => (
+                          <option key={supplier._id} value={supplier._id}>
+                            {supplier.name}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="selProduct">Product</label>
+                    {!this.state.products || this.state.products.length === 0 ? (
                       <select
                         className="form-control"
-                        id="selSupplier"
-                        onChange={this.handleSupplier}
-                        name="supplier"
+                        id="selProduct"
+                        onChange={this.handleProduct}
+                        name="product"
+                        disabled
+                      />
+                    ) : (
+                      <select
+                        className="form-control"
+                        id="selProduct"
+                        onChange={this.handleProduct}
+                        name="product"
                       >
-                        <option value="x">Select Supplier</option>
-                        {this.state.suppliers &&
-                          this.state.suppliers.map(supplier => (
-                            <option key={supplier._id} value={supplier._id}>
-                              {supplier.name}
-                            </option>
-                          ))}
+                        <option value="x">Select Product</option>
+                        {this.state.products &&
+                        this.state.products.map(product => (
+                          <option
+                            key={product._id}
+                            value={product.name}
+                          >
+                            {product.name}
+                          </option>
+                        ))}
                       </select>
-                    </div>
-                    <div className="form-group col-md-6">
-                      <label htmlFor="selProduct">Product</label>
-                      {!this.state.products || this.state.products.length === 0 ? (
-                        <select
-                          className="form-control"
-                          id="selProduct"
-                          onChange={this.handleProduct}
-                          name="product"
-                          disabled
-                        />
-                      ) : (
-                        <select
-                            className="form-control"
-                            id="selProduct"
-                            onChange={this.handleProduct}
-                            name="product"
-                        >
-                            <option value="x">Select Product</option>
-                            {this.state.products &&
-                            this.state.products.map(product => (
-                                <option
-                                key={product._id}
-                                value={product.name}
-                                >
-                                {product.name}
-                                </option>
-                            ))}
-                        </select>
-                          )}
-                    </div>
+                    )}
                   </div>
+                </div>
                 <h2 className="sub-header">Product details</h2>
                 <div className="table-responsive">
                   <table className="table table-striped">
@@ -158,6 +158,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-    <App />,
-    document.getElementById('root')
+  <App />,
+  document.getElementById('root')
 )
